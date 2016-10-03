@@ -1,4 +1,10 @@
+#include <sys/syscall.h>
 #include "pthread.h"
+#include "../../../common/include/kernel/syscall-definitions.h"
+
+int pthread_self() {
+  return __syscall(sc_pthread_self, 0, 0, 0, 0, 0);
+}
 
 /**
  * function stub

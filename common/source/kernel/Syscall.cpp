@@ -48,6 +48,9 @@ size_t Syscall::syscallException(size_t syscall_number, size_t arg1, size_t arg2
     case sc_pseudols:
       VfsSyscall::readdir((const char*) arg1);
       break;
+    case sc_pthread_self:
+      return_value = currentThread->getTID();
+      break;
     default:
       kprintf("Syscall::syscall_exception: Unimplemented Syscall Number %zd\n", syscall_number);
   }

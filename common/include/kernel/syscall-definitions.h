@@ -61,3 +61,5 @@
 
 #define sc_trace 252
 
+#define sc_pthread_self 300
+
