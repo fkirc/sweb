@@ -63,3 +63,4 @@
 
 #define sc_pthread_self 300
 
+#define sc_virt_phys_lookup 350

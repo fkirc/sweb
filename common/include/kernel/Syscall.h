@@ -120,6 +120,8 @@ class Syscall
 
   static void trace();
 
+  static size_t virt_to_phys(size_t);
+
   private:
   //helper functions
 };
