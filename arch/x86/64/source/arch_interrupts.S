@@ -92,6 +92,18 @@ arch_errorHandler_\num:
 
 .text
 
+.global arch_divzeroHandler
+.extern divzeroHandler
+arch_divzeroHandler:
+    pushall
+    movq %rsp,%rdi
+    movq $0,%rsi
+    call arch_saveThreadRegisters
+    call divzeroHandler
+    hlt
+
+
+
 .extern pageFaultHandler
 .global arch_pageFaultHandler
 arch_pageFaultHandler:

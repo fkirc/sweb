@@ -48,7 +48,7 @@ extern "C" void arch_dummyHandler();
 #define ERRORHANDLER(X) {X, &arch_errorHandler_##X},
 #define IRQHANDLER(X) {X + 32, &arch_irqHandler_##X},
 InterruptHandlers InterruptUtils::handlers[] = {
-  ERRORHANDLER(0)
+  {0, &arch_divzeroHandler},
   ERRORHANDLER(4)
   ERRORHANDLER(5)
   ERRORHANDLER(6)

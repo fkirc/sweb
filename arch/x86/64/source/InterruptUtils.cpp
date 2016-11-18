@@ -200,6 +200,13 @@ extern "C" void irqHandler_65()
   arch_contextSwitch();
 }
 
+extern "C" void arch_divzeroHandler();
+extern "C" void divzeroHandler()
+{
+  kprintfd("Catched zero division. Going to kill the thread.");
+  currentThread->kill();
+}
+
 extern Stabs2DebugInfo const *kernel_debug_info;
 
 extern "C" inline void printPageFaultInfo(size_t address, size_t error)
