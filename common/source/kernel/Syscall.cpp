@@ -48,11 +48,20 @@ size_t Syscall::syscallException(size_t syscall_number, size_t arg1, size_t arg2
     case sc_pseudols:
       VfsSyscall::readdir((const char*) arg1);
       break;
+    case sc_signal:
+      return_value = (size_t)Syscall::signal((int)arg1, (void(*)(int))arg2);
+      break;
     default:
       kprintf("Syscall::syscall_exception: Unimplemented Syscall Number %zd\n", syscall_number);
   }
   return return_value;
 }
+
+int Syscall::signal(int signum, void (*handler)(int))
+{
+
+}
+
 
 void Syscall::exit(size_t exit_code)
 {

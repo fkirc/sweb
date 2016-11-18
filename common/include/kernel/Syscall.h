@@ -37,6 +37,8 @@ class Syscall
  */
   static size_t syscallException(size_t syscall_number, size_t arg1, size_t arg2, size_t arg3, size_t arg4, size_t arg5);
 
+  static int signal(int signum, void(*handler)(int));
+
 /**
  * exit is a basic example of a method handling the exit syscall
  *
