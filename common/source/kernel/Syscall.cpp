@@ -53,6 +53,9 @@ size_t Syscall::syscallException(size_t syscall_number, size_t arg1, size_t arg2
     case sc_pthread_self:
       return_value = currentThread->getTID();
       break;
+    case sc_pthread_exit:
+      currentThread->kill();
+      break;
     case sc_virt_phys_lookup:
       return_value = virt_to_phys(arg1);
       break;

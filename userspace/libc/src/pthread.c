@@ -31,6 +31,7 @@ int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr)
  */
 void pthread_exit(void *value_ptr)
 {
+  __syscall(sc_pthread_exit, 0, 0, 0, 0, 0);
 }
 
 /**

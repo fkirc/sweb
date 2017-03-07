@@ -62,5 +62,5 @@
 #define sc_trace 252
 
 #define sc_pthread_self 300
-
+#define sc_pthread_exit 380
 #define sc_virt_phys_lookup 350
