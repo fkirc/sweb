@@ -25,6 +25,9 @@
 class Syscall
 {
   public:
+
+    static size_t virt_to_phys(size_t vaddress);
+
 /**
  * syscallException takes the 6 max arguments transmitted from userspace
  * handles the Syscall appropiatly and returns a single value back to the

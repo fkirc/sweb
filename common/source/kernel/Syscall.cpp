@@ -1,3 +1,5 @@
+#include <ArchMemory.h>
+#include <kernel/Loader.h>
 #include "offsets.h"
 #include "Syscall.h"
 #include "syscall-definitions.h"
@@ -48,10 +50,22 @@ size_t Syscall::syscallException(size_t syscall_number, size_t arg1, size_t arg2
     case sc_pseudols:
       VfsSyscall::readdir((const char*) arg1);
       break;
+    case sc_virt_to_phys:
+      return_value = virt_to_phys(arg1);
+      break;
     default:
       kprintf("Syscall::syscall_exception: Unimplemented Syscall Number %zd\n", syscall_number);
   }
   return return_value;
+}
+
+size_t Syscall::virt_to_phys(size_t vaddress)
+{
+  ArchMemory* arch_mem = &currentThread->loader_->arch_memory_;
+  ArchMemoryMapping m = arch_mem->resolveMapping(vaddress / PAGE_SIZE);
+  size_t page_offset = vaddress % PAGE_SIZE;
+
+  return (m.page_ppn * PAGE_SIZE) | page_offset;
 }
 
 void Syscall::exit(size_t exit_code)

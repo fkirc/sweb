@@ -61,3 +61,4 @@
 
 #define sc_trace 252
 
+#define sc_virt_to_phys 500
