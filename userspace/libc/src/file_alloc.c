@@ -1,23 +1,3 @@
-
-// Projectname: SWEB
-// Simple operating system for educational purposes
-//
-// Copyright (C) 2005  Andreas Niederl
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-
 #include "unistd.h"
 #include "fcntl.h"
 #include "stdarg.h"
@@ -34,8 +14,7 @@
  */
 int link(const char *old_path, const char *new_path)
 {
-  return __syscall(sc_link, (long) old_path, (long) new_path, 0x00, 0x00,
-                   0x00);
+  return -1;
 }
 
 
@@ -53,7 +32,7 @@ int link(const char *old_path, const char *new_path)
  */
 int unlink(const char *path)
 {
-  return __syscall(sc_unlink, (long) path, 0x00, 0x00, 0x00, 0x00);
+  return -1;
 }
 
 
@@ -147,8 +126,7 @@ int creat(const char *path, mode_t mode)
  */
 int pipe(int file_descriptor_array[2])
 {
-  return __syscall(sc_pipe, (long) file_descriptor_array, 0x00, 0x00, 0x00,
-                   0x00);
+  return -1;
 }
 
 
@@ -165,7 +143,7 @@ int pipe(int file_descriptor_array[2])
  */
 int dup(int file_descriptor)
 {
-  return __syscall(sc_dup, file_descriptor, 0x00, 0x00, 0x00, 0x00);
+  return -1;
 }
 
 
@@ -183,8 +161,7 @@ int dup(int file_descriptor)
  */
 int dup2(int old_file_descriptor, int new_file_descriptor)
 {
-  return __syscall(sc_dup2, old_file_descriptor, new_file_descriptor, 0x00,
-                   0x00, 0x00);
+  return -1;
 }
 
 
@@ -198,6 +175,5 @@ int dup2(int old_file_descriptor, int new_file_descriptor)
  */
 int rename(const char *old_path, const char *new_path)
 {
-  return __syscall(sc_rename, (long) old_path, (long) new_path, 0x00, 0x00,
-                   0x00);
+  return -1;
 }
