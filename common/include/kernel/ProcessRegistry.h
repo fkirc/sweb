@@ -38,11 +38,11 @@ class ProcessRegistry : public Thread
     static ProcessRegistry* instance();
     void createProcess(const char* path);
 
+    Mutex counter_lock_;
   private:
 
     char const **progs_;
     uint32 progs_running_;
-    Mutex counter_lock_;
     Condition all_processes_killed_;
     static ProcessRegistry* instance_;
 };

@@ -50,6 +50,13 @@ size_t Syscall::syscallException(size_t syscall_number, size_t arg1, size_t arg2
     case sc_pseudols:
       VfsSyscall::readdir((const char*) arg1);
       break;
+    case sc_get_tid:
+      return_value = currentThread->getTID();
+      break;
+    case sc_pthread_exit:
+      debug(SYSCALL, "pthread exit called\n");
+      currentThread->kill();
+      break;
     default:
       kprintf("Syscall::syscall_exception: Unimplemented Syscall Number %zd\n", syscall_number);
   }
@@ -59,6 +66,8 @@ size_t Syscall::syscallException(size_t syscall_number, size_t arg1, size_t arg2
 void Syscall::exit(size_t exit_code)
 {
   debug(SYSCALL, "Syscall::EXIT: called, exit_code: %zd\n", exit_code);
+  // TODO: Kill all threads (not only current thread)
+  // Do not kill them directly, but cancel them instead
   currentThread->kill();
 }
 

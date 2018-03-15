@@ -18,6 +18,9 @@ class UserProcess : public Thread
 
     virtual void Run(); // not used
 
+
+    Mutex thread_map_mutex_;
+
   private:
     int32 fd_;
 };

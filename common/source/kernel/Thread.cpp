@@ -10,7 +10,7 @@
 #include "backtrace.h"
 #include "KernelMemoryManager.h"
 #include "Stabs2DebugInfo.h"
-
+#include "ProcessRegistry.h"
 #define BACKTRACE_MAX_FRAMES 20
 
 
@@ -29,6 +29,8 @@ extern "C" void threadStartHack()
   while(1);
 }
 
+size_t tid_counter = 1;
+
 Thread::Thread(FileSystemInfo *working_dir, ustl::string name, Thread::TYPE type) :
     kernel_registers_(0), user_registers_(0), switch_to_userspace_(type == Thread::USER_THREAD ? 1 : 0), loader_(0),
     next_thread_in_lock_waiters_list_(0), lock_waiting_on_(0), holding_lock_list_(0), state_(Running), tid_(0),
@@ -38,6 +40,20 @@ Thread::Thread(FileSystemInfo *working_dir, ustl::string name, Thread::TYPE type
   ArchThreads::createKernelRegisters(kernel_registers_, (void*) (type == Thread::USER_THREAD ? 0 : threadStartHack), getStackStartPointer());
   kernel_stack_[2047] = STACK_CANARY;
   kernel_stack_[0] = STACK_CANARY;
+
+
+
+  MutexLock lock(ProcessRegistry::instance()->counter_lock_);
+  // ProcessRegistry::instance()->counter_lock_.acquire();
+  tid_ = tid_counter++;
+
+  if (something wrong)
+    return -1;
+
+  // ProcessRegistry::instance()->counter_lock_.release();
+
+  // tid_ = ArchThreads::atomic_add(tid_counter, 1);
+  return 0;
 }
 
 Thread::~Thread()
