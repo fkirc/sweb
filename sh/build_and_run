@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e # use -e to abort when anything goes wrong
+sweb_dir=$(pwd)
+mkdir -p /tmp/sweb
+cd /tmp/sweb
+cmake "$sweb_dir"
+make
+make qemu
+

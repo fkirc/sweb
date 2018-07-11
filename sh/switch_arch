@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <arch_name>  (one of x86_32, x86_32_pae, x86_64, arm_*)"
+    exit -1
+fi
+
+arch=$1 # first arg must be the selected architecture
+cwd=$(pwd)
+
+mkdir -p /tmp/sweb
+cd /tmp/sweb
+cmake "$cwd"
+make $arch
+make
+make qemu

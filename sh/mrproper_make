@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+mkdir -p /tmp/sweb
+cd /tmp/sweb
+make mrproper
